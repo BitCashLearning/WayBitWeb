@@ -5,7 +5,7 @@
   Time: 3:12 p.m.
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="com.virtualpairprogrammers.domain.MenuItem" %>
+<%@ page import="us.bitcash.apps.waybitweb.domain.MenuItem" %>
 <%@ page import="java.util.List" %>
 
 <% List<MenuItem> items = (List<MenuItem>) request.getAttribute("items"); %>
