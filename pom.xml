@@ -3,17 +3,17 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.virtualpairprogrammers</groupId>
+	<groupId>us.bitcash.apps</groupId>
 
-	<artifactId>restaurant</artifactId>
+	<artifactId>waybitweb</artifactId>
 
 	<version>1.0-SNAPSHOT</version>
 
 	<packaging>war</packaging>
 
-	<name>Ricky's Restaurant</name>
+	<name>Waybit: Web Edition</name>
 
-	<url>http://restaurant.virtualpairprogrammers.com</url>
+	<url>http://web.waybit.org/</url>
 
 	<properties>
 		<tomcat.version>8.0.28</tomcat.version>
