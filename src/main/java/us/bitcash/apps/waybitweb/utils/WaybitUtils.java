@@ -1,4 +1,4 @@
-package us.bitcash.apps.waybitweb.data;
+package us.bitcash.apps.waybitweb.utils;
 
 public class WaybitUtils {
 
