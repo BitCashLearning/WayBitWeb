@@ -21,15 +21,15 @@
     ArrayList<Waybitmoji> list = (ArrayList<Waybitmoji>) request.getAttribute("list");
 %>
 
-<form action="/thankYou.html" method="POST">
+<form action="orderReceived.html" method="POST">
 
     <%
         for (Waybitmoji e : list) {
     %>
 
     <li>
-        <label for="<%="item_"+e.getUuid()%>"> <%=e.getName() + " : " + e.getPrice()%></label><br>
-        <input type="text" id="<%="item_"+e.getUuid()%>" name="<%="item_"+e.getUuid()%>">
+        <label for="<%=e.getUuid()%>"> <%=e.getName() + " : " + e.getPrice()%></label><br>
+        <input type="text" id="<%=e.getUuid()%>" name="<%=e.getUuid()%>">
     </li>
     <%
         }

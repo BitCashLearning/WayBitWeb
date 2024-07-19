@@ -1,12 +1,11 @@
 package us.bitcash.apps.waybitweb.domain;
 
-import us.bitcash.apps.waybitweb.data.WaybitDAO;
-
 import java.util.UUID;
 
 public class Waybitmoji {
 
-    private final WaybitDAO dataServiceObject;
+    public Waybitmoji() {
+    }
 
     public String getName() {
         return name;
@@ -36,14 +35,6 @@ public class Waybitmoji {
     }
 
     private double price;
-
-    public Waybitmoji(WaybitDAO dataServiceObject, String name, double price) {
-        this.name = name;
-        this.price = price;
-        this.dataServiceObject = dataServiceObject;
-        this.uuid = "item_"+UUID.randomUUID().toString();
-
-    }
 
 
 

@@ -1,6 +1,7 @@
 package us.bitcash.apps.waybitweb.servlets;
 
 import us.bitcash.apps.waybitweb.data.WaybitDAO;
+import us.bitcash.apps.waybitweb.data.WaybitDAOFactory;
 import us.bitcash.apps.waybitweb.domain.Waybitmoji;
 
 import javax.servlet.RequestDispatcher;
@@ -26,9 +27,9 @@ public class CollectionSearchServlet extends HttpServlet {
             return;
         }
 
-        WaybitDAO waybitDAO = new WaybitDAO();
+        WaybitDAO waybitDAO = WaybitDAOFactory.getWaybitDAO();
 
-        List<Waybitmoji> results = waybitDAO.findBy(
+        List<Waybitmoji> results = waybitDAO.filterBy(
                 p->p.getName().contains(queryOptional.get()));
 
         request.setAttribute("searchResults",results);

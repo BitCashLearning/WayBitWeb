@@ -1,6 +1,7 @@
 package us.bitcash.apps.waybitweb.servlets;
 
 import us.bitcash.apps.waybitweb.data.WaybitDAO;
+import us.bitcash.apps.waybitweb.data.WaybitDAOFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,9 +16,9 @@ import java.io.IOException;
 public class OrderServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        WaybitDAO waybitDAO = new WaybitDAO();
+        WaybitDAO waybitDAO = WaybitDAOFactory.getWaybitDAO();
 
-        request.setAttribute("list",waybitDAO.getAll());
+        request.setAttribute("list",waybitDAO.getFullCollection());
 
         ServletContext context = request.getServletContext();
         RequestDispatcher dispatch = context.getRequestDispatcher("/order.jsp");
