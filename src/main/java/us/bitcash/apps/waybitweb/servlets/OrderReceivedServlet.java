@@ -1,5 +1,6 @@
 package us.bitcash.apps.waybitweb.servlets;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import us.bitcash.apps.waybitweb.data.WaybitDAO;
 import us.bitcash.apps.waybitweb.data.WaybitDAOFactory;
 import us.bitcash.apps.waybitweb.domain.Waybitmoji;
@@ -24,21 +25,23 @@ public class OrderReceivedServlet extends HttpServlet {
         double price = 0.00;
         while (params.hasNext()) {
             String param = params.next();
+            String value = request.getParameter(param);
+
             Optional<Waybitmoji> wbeOptional = waybitDAO.findById(param);
 
             if (wbeOptional.isEmpty()) continue;
             Waybitmoji wbe = wbeOptional.get();
 
-            int quantity = Integer.parseInt(request.getParameter(param));
+            int quantity = NumberUtils.isParsable(value) ? Integer.parseInt(value) : 0;
             price += wbe.getPrice()*quantity;
 
             cart.add(wbe);
 
-            System.out.println(param+" : " + "price updated to " + price);
+//            System.out.println(param+" : " + "price updated to " + price);
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("total",Double.valueOf(price));
+        session.setAttribute("total",price);
         session.setAttribute("cart",cart);
 
         response.sendRedirect("/thankYou.html");

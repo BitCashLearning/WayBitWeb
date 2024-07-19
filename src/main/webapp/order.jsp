@@ -25,11 +25,12 @@
 
     <%
         for (Waybitmoji e : list) {
+            String uuid = e.getUuid();
     %>
 
     <li>
-        <label for="<%=e.getUuid()%>"> <%=e.getName() + " : " + e.getPrice()%></label><br>
-        <input type="text" id="<%=e.getUuid()%>" name="<%=e.getUuid()%>">
+        <label for="<%=uuid%>"> <%=e.getName() + " : " + e.getPrice()%></label><br>
+        <input type="text" name="<%=uuid%>">
     </li>
     <%
         }

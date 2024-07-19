@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="us.bitcash.apps.waybitweb.domain.Waybitmoji"%>
+<%@ page import="java.util.List" %>
 <html>
 <head>
     <title>Waybit: Web Edition</title>
@@ -17,7 +18,7 @@
 <h1>Results:</h1>
 
 <%
-    ArrayList<Waybitmoji> list = (ArrayList<Waybitmoji>) request.getAttribute("searchResults");
+    List<Waybitmoji> list = (List<Waybitmoji>) request.getAttribute("searchResults");
 
     for (Waybitmoji w : list) {
 %>
