@@ -7,6 +7,7 @@ import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
+import us.bitcash.apps.waybitweb.data.WaybitDAOFactory;
 
 public class Main {
 
@@ -25,7 +26,8 @@ public class Main {
         ctx.setResources(resources);
 
         tomcat.addUser("bitcash","pass");
-        tomcat.addRole("bitcash","user");
+        tomcat.addRole("bitcash","admin");
+
         tomcat.start();
         tomcat.getServer().await();
     }

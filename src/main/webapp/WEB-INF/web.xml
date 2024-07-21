@@ -8,7 +8,17 @@
     <description>
         The menu and online ordering system for Ricky's Restaurant
     </description>
-    
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin Panel</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
     <security-role>
         <role-name>user</role-name>
     </security-role>
@@ -17,11 +27,7 @@
     </security-role>
 
     <login-config>
-        <auth-method>FORM</auth-method>
-        <form-login-config>
-            <form-login-page>/login.html</form-login-page>
-            <form-error-page>/failed-login.html</form-error-page>
-        </form-login-config>
+        <auth-method>BASIC</auth-method>
     </login-config>
 
 

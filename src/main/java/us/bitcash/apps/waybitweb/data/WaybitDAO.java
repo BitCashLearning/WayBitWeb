@@ -10,6 +10,8 @@ import java.util.function.Predicate;
 
 public class WaybitDAO {
 
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/waybit?useSSL=false";
+
     protected WaybitDAO() {}
 
     /*
@@ -68,7 +70,9 @@ public class WaybitDAO {
 
         try ( Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/waybit?useSSL=false", "root", "password");
              PreparedStatement stmt = con.prepareStatement("SELECT * FROM waybitmojis WHERE wbm_id = ?");
-             ResultSet rs = stmt.executeQuery(); ) {
+             ) {
+            stmt.setString(1,id);
+            ResultSet rs = stmt.executeQuery();
 
             res = buildCollection(rs);
 
@@ -77,5 +81,27 @@ public class WaybitDAO {
         }
 
         return res.isEmpty() ? Optional.empty() : Optional.of(res.get(0));
+    }
+
+    /*
+    Creates a new waybitmoji and inserts it into the database
+    returns true/false based on whether the operation was done successfully
+     */
+    public void createWaybitmoji(String name, double price) {
+        try (
+                Connection con = DriverManager.getConnection(DATABASE_URL,"root","password");
+                PreparedStatement stmt = con.prepareStatement("INSERT INTO waybitmojis(name,price) " +
+                                                                    "VALUES (?,?)");
+                ) {
+            stmt.setString(1,name);
+            stmt.setDouble(2,price);
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
     }
 }
