@@ -1,7 +1,5 @@
 package us.bitcash.apps.waybitweb.domain;
 
-import java.util.UUID;
-
 public class Waybitmoji {
 
     public Waybitmoji() {

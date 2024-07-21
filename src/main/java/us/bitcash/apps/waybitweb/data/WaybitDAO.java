@@ -15,8 +15,8 @@ public class WaybitDAO {
     /*
     Operates on the retrieved ResultSet to assemble a List of waybitmoji objects.
      */
-    public List < Waybitmoji > buildCollection(ResultSet results) throws SQLException {
-        List < Waybitmoji > collection = new ArrayList < > ();
+    public List <Waybitmoji> buildCollection(ResultSet results) throws SQLException {
+        List <Waybitmoji> collection = new ArrayList <> ();
 
         while (results.next()) {
             Waybitmoji emoji = new Waybitmoji();
@@ -36,9 +36,9 @@ public class WaybitDAO {
     connects to and queries the database, stores the results in a ResultSet, calls buildCollection
     for it to operate on the passed in container and then returns the resulting built collection as its output.
      */
-    public List < Waybitmoji > getFullCollection() {
+    public List <Waybitmoji> getFullCollection() {
 
-        List < Waybitmoji > collection;
+        List <Waybitmoji> collection;
 
         try (
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/waybit?useSSL=false", "root", "password"); Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM waybitmojis");
@@ -55,19 +55,21 @@ public class WaybitDAO {
     /*
     Streams the results of querying the entire database and then filters it using the provided predicate function
      */
-    public List < Waybitmoji > filterBy(Predicate < Waybitmoji > filter) {
+    public List <Waybitmoji> filterBy(Predicate <Waybitmoji> filter) {
         return getFullCollection().stream().filter(filter).toList();
     }
 
     /*
     Directly queries the database for a waybitmoji record that has the passed in id.
-    WARNING: Susceptible to SQL injection, needs to be remade eventually.
      */
-    public Optional < Waybitmoji > findById(String id) {
+    public Optional <Waybitmoji> findById(String id) {
 
-        List < Waybitmoji > res;
+        List <Waybitmoji> res;
 
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/waybit?useSSL=false", "root", "password"); Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM waybitmojis WHERE wbm_id = " + id);) {
+        try ( Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/waybit?useSSL=false", "root", "password");
+             PreparedStatement stmt = con.prepareStatement("SELECT * FROM waybitmojis WHERE wbm_id = ?");
+             ResultSet rs = stmt.executeQuery(); ) {
+
             res = buildCollection(rs);
 
         } catch (SQLException e) {
